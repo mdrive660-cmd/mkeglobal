@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://mdrive660-cmd.github.io/mkeglobal/sitemap.xml
