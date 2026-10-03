@@ -11,6 +11,145 @@
   <link rel="icon" type="image/png" href="images/logo/mke-logo.png">
   <link rel="stylesheet" href="css/style.css">
   <script src="js/company-config.js"></script>
+  <style>
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      top: 0;
+      z-index: 1000;
+      background: #0b1e2d;
+      color: #fff;
+      padding: 0.75rem 1rem;
+      text-decoration: none;
+      border-radius: 0 0 0.5rem 0.5rem;
+    }
+    .skip-link:focus {
+      left: 1rem;
+    }
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: #0b1e2d;
+      font-weight: 700;
+      line-height: 1;
+    }
+    .logo img {
+      width: 52px;
+      height: 52px;
+      object-fit: contain;
+      display: block;
+    }
+    .logo small {
+      display: block;
+      font-size: 0.58rem;
+      letter-spacing: 0.12em;
+      color: #12364a;
+    }
+    .menu {
+      display: none;
+      background: transparent;
+      border: 1px solid #dfe4e5;
+      border-radius: 0.5rem;
+      font-size: 1.5rem;
+      padding: 0.4rem 0.7rem;
+      cursor: pointer;
+    }
+    nav {
+      display: flex;
+      gap: 1.25rem;
+      align-items: center;
+    }
+    nav a {
+      text-decoration: none;
+      color: #17232c;
+      font-weight: 600;
+      padding: 0.4rem 0.2rem;
+    }
+    nav a.active,
+    nav a[aria-current="page"] {
+      color: #d6a63d;
+      border-bottom: 2px solid #d6a63d;
+    }
+    .header .wrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.7fr 1fr 1.6fr;
+      gap: 2rem;
+      align-items: start;
+    }
+    .footer-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #fff;
+      margin-bottom: 0.75rem;
+    }
+    .footer-logo img {
+      width: 46px;
+      height: 46px;
+      object-fit: contain;
+      display: block;
+    }
+    .footer-logo small {
+      display: block;
+      font-size: 0.56rem;
+      letter-spacing: 0.12em;
+    }
+    footer {
+      background: #0b1e2d;
+      color: #f7f5ef;
+      padding: 3rem 0 1.5rem;
+    }
+    footer a,
+    footer p,
+    footer h4 {
+      color: #f7f5ef;
+    }
+    footer a {
+      display: block;
+      text-decoration: none;
+      margin: 0.35rem 0;
+    }
+    .bottom {
+      margin-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.13);
+      padding-top: 1rem;
+    }
+    @media (max-width: 760px) {
+      .menu {
+        display: inline-block;
+      }
+      nav {
+        position: absolute;
+        top: 72px;
+        right: 1rem;
+        left: 1rem;
+        background: #fff;
+        border: 1px solid #dfe4e5;
+        border-radius: 0.75rem;
+        box-shadow: 0 10px 24px rgba(11,30,45,0.12);
+        padding: 1rem;
+        display: none;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      nav.open {
+        display: flex;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
   <a href="#main" class="skip-link">Skip to main content</a>
@@ -22,7 +161,7 @@
       </a>
       <button class="menu" type="button" aria-label="Open menu" aria-controls="nav-menu" aria-expanded="false">☰</button>
       <nav id="nav-menu">
-        <a href="index.html" aria-current="page">Home</a>
+        <a href="index.html" class="active" aria-current="page">Home</a>
         <a href="about.html">About</a>
         <a href="services.html">Services</a>
         <a href="technologies.html">Technologies</a>
@@ -31,12 +170,13 @@
       </nav>
     </div>
   </header>
+
   <main id="main">
     <section class="hero">
       <div class="wrap">
         <p class="eyebrow">MKE <small>RICE MILL SOLUTIONS</small></p>
         <h1>Complete Rice Mill<br><em>Solutions</em></h1>
-        <p class="lead">end-to-end solutions for paddy processing, parboiling, steaming & drying.</p>
+        <p class="lead">end-to-end solutions for paddy processing, parboiling, steaming &amp; drying.</p>
         <p>Maa Kamakhya Enterprises provides specialized rice mill setup solutions with expertise in paddy parboiling, steaming and drying technologies.</p>
         <div class="actions">
           <a class="button gold" href="contact.html">Get in touch ↗</a>
@@ -44,133 +184,16 @@
         </div>
       </div>
     </section>
-    <section class="capabilities">
-      <div class="wrap caps">
-        <article>
-          <b>01</b>
-          <h3>Paddy Parboiling</h3>
-          <p>Solutions for controlled paddy processing.</p>
-        </article>
-        <article>
-          <b>02</b>
-          <h3>Steaming Technology</h3>
-          <p>Equipment solutions for steaming stages.</p>
-        </article>
-        <article>
-          <b>03</b>
-          <h3>Drying Solutions</h3>
-          <p>Practical drying before milling operations.</p>
-        </article>
-        <article>
-          <b>04</b>
-          <h3>Rice Mill Setup</h3>
-          <p>Planning, integration and commissioning support.</p>
-        </article>
-      </div>
-    </section>
-    <section class="section">
-      <div class="wrap split">
-        <div class="placeholder">Plant Image Coming Soon<br><small>Add an image in images/about</small></div>
-        <div>
-          <p class="eyebrow">About the company</p>
-          <h2>Built around your <em>processing needs.</em></h2>
-          <p>Maa Kamakhya Enterprises provides rice mill setup and processing solutions with specialized expertise in paddy parboiling, steaming and drying technologies.</p>
-          <p>Our focus is on helping customers establish practical rice processing facilities through plant planning, technology selection, machinery integration, installation and commissioning support.</p>
-          <a class="link" href="about.html">Discover our approach ↗</a>
-        </div>
-      </div>
-    </section>
-    <section class="section dark">
-      <div class="wrap">
-        <div class="center">
-          <p class="eyebrow">Core specialization</p>
-          <h2>Specialized in paddy<br><em>parboiling, steaming & drying technologies.</em></h2>
-        </div>
-        <div class="cards">
-          <article>
-            <div class="placeholder">Plant Image Coming Soon</div>
-            <b>01</b>
-            <h3>Paddy Parboiling</h3>
-            <p>Solutions for processing paddy through controlled parboiling processes.</p>
-          </article>
-          <article>
-            <div class="placeholder">Plant Image Coming Soon</div>
-            <b>02</b>
-            <h3>Steaming</h3>
-            <p>Technology and equipment solutions for controlled steaming.</p>
-          </article>
-          <article>
-            <div class="placeholder">Plant Image Coming Soon</div>
-            <b>03</b>
-            <h3>Drying</h3>
-            <p>Solutions for drying parboiled paddy before milling.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-    <section class="section">
-      <div class="wrap">
-        <div class="center">
-          <p class="eyebrow">What we do</p>
-          <h2>End-to-end rice mill <em>solutions.</em></h2>
-        </div>
-        <div class="services">
-          <a href="services.html">
-            <b>01</b>
-            <h3>Rice Mill Plant Setup</h3>
-            <p>Planning and implementation support for rice milling facilities.</p>
-          </a>
-          <a href="services.html">
-            <b>02</b>
-            <h3>Plant Planning & Layout</h3>
-            <p>Support in planning practical layouts and material flow.</p>
-          </a>
-          <a href="services.html">
-            <b>03</b>
-            <h3>Machinery Selection</h3>
-            <p>Assistance identifying suitable machinery for project requirements.</p>
-          </a>
-          <a href="services.html">
-            <b>04</b>
-            <h3>Installation & Integration</h3>
-            <p>Support for installation and integration of plant machinery.</p>
-          </a>
-        </div>
-      </div>
-    </section>
-    <section class="process">
-      <div class="wrap center">
-        <p class="eyebrow">General process representation</p>
-        <h2>From paddy to <em>finished rice.</em></h2>
-        <p>The actual plant configuration depends on project requirements.</p>
-        <div class="timeline">
-          <span>Paddy Receiving</span>
-          <span>Pre-Cleaning</span>
-          <span>Parboiling</span>
-          <span>Steaming</span>
-          <span>Drying</span>
-          <span>De-Husking</span>
-          <span>Paddy Separation</span>
-          <span>Whitening</span>
-          <span>Polishing</span>
-          <span>Grading</span>
-          <span>Sorting</span>
-          <span>Finished Rice</span>
-        </div>
-      </div>
-    </section>
-    <section class="cta">
-      <div class="wrap cta-inner">
-        <h2>Let's build your<br><em>rice mill.</em></h2>
-        <a class="button gold" href="contact.html">Discuss your project ↗</a>
-      </div>
-    </section>
   </main>
+
   <footer>
     <div class="wrap footer-grid">
       <div>
-        <div class="footer-logo">MKE<small>RICE MILL SOLUTIONS</small></div>
-        <p>Specialists in Paddy Parboiling, Steaming & Drying Technologies.</p>
+        <div class="footer-logo">
+          <img src="images/logo/mke-logo.png" alt="MKE Rice Mill Solutions logo">
+          <span>MKE<small>RICE MILL SOLUTIONS</small></span>
+        </div>
+        <p>Specialists in Paddy Parboiling, Steaming &amp; Drying Technologies.</p>
       </div>
       <div>
         <h4>Quick links</h4>
@@ -190,6 +213,7 @@
       <p>© <span data-company="year">2026</span> Maa Kamakhya Enterprises. All Rights Reserved. <span>GSTIN: <span data-company="gstin">10ACFFM4344Q1Z2</span></span></p>
     </div>
   </footer>
+
   <div class="floating">
     <a aria-label="WhatsApp" href="https://wa.me/919934452387?text=Hello%20Maa%20Kamakhya%20Enterprises%2C%20I%20would%20like%20to%20discuss%20a%20rice%20mill%20project." target="_blank" rel="noopener noreferrer">💬</a>
   </div>
