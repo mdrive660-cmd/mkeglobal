@@ -11,47 +11,131 @@
   <link rel="icon" type="image/png" href="images/logo/mke-logo.png">
   <link rel="stylesheet" href="css/style.css">
   <style>
-    /* About page additions – uses neutral colours so it blends with css/style.css */
-    .iso-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: .6rem;
-      margin: 1rem 0 0;
-      padding: .55rem 1rem;
-      border: 1.5px solid currentColor;
-      border-radius: 999px;
-      font-weight: 600;
-      font-size: .95rem;
-      line-height: 1.3;
+    /* About page layout – scoped to .ab so it never clashes with css/style.css */
+    .ab {
+      --ab-ink: #17261b;
+      --ab-muted: #4d5d52;
+      --ab-green: #1f4d33;
+      --ab-green-2: #2f6b47;
+      --ab-sage: #e7eee6;
+      --ab-gold: #d8a935;
+      --ab-line: #d5ddd3;
+      --ab-bg: #fbfcfa;
+      color: var(--ab-ink);
+      background: var(--ab-bg);
     }
-    .iso-badge svg { flex: none; width: 1.3em; height: 1.3em; }
+    .ab *, .ab *::before, .ab *::after { box-sizing: border-box; }
+    .ab-wrap { width: min(1160px, 100% - 2.5rem); margin-inline: auto; }
+    .ab h1, .ab h2, .ab h3 { line-height: 1.12; letter-spacing: -.02em; margin: 0; }
+    .ab p { margin: 0; }
 
-    .why-intro { max-width: 62ch; }
-    .why-list {
-      list-style: none;
-      margin: 2rem 0 0;
-      padding: 0;
+    /* Hero */
+    .ab-hero { padding: clamp(2.5rem, 7vw, 5.5rem) 0 clamp(2rem, 5vw, 4rem); }
+    .ab-hero-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.25rem 2rem;
+      gap: clamp(2rem, 5vw, 4rem);
+      grid-template-columns: 1.25fr .75fr;
+      align-items: center;
     }
-    .why-list li {
-      padding: 0 0 0 1rem;
-      border-left: 3px solid currentColor;
+    .ab-hero h1 { font-size: clamp(2.2rem, 5.4vw, 4rem); margin: .6rem 0 1.25rem; }
+    .ab-hero h1 em { font-style: normal; color: var(--ab-green-2); }
+    .ab-lead { font-size: clamp(1.05rem, 1.6vw, 1.2rem); color: var(--ab-muted); max-width: 56ch; line-height: 1.65; }
+    .ab-lead + .ab-lead { margin-top: .9rem; }
+    .ab-actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.75rem; }
+    .ab-btn {
+      display: inline-block; padding: .8rem 1.4rem; border-radius: 10px; font-weight: 600;
+      text-decoration: none; border: 2px solid var(--ab-green); transition: background .2s, color .2s;
     }
-    .why-list h3 { margin: 0 0 .35rem; font-size: 1.1rem; }
-    .why-list p { margin: 0; max-width: 46ch; }
+    .ab-btn-primary { background: var(--ab-green); color: #fff; }
+    .ab-btn-primary:hover { background: var(--ab-green-2); border-color: var(--ab-green-2); }
+    .ab-btn-ghost { color: var(--ab-green); background: transparent; }
+    .ab-btn-ghost:hover { background: var(--ab-sage); }
+    .ab-btn:focus-visible, .ab a:focus-visible { outline: 3px solid var(--ab-gold); outline-offset: 3px; }
 
-    .quality-note {
-      margin-top: 2.5rem;
-      padding: 1.25rem 1.5rem;
-      border: 1px solid rgba(128,128,128,.4);
-      border-radius: 8px;
-      max-width: 70ch;
+    /* ISO certificate card */
+    .ab-iso {
+      background: var(--ab-green); color: #fff; border-radius: 22px;
+      padding: clamp(1.5rem, 3vw, 2.25rem); text-align: center;
+      box-shadow: 0 18px 40px -22px rgba(23, 38, 27, .6);
+      position: relative; overflow: hidden;
     }
-    .quality-note p { margin: 0; }
-    .quality-note p + p { margin-top: .5rem; }
-    .about-cta { margin-top: 2rem; }
+    .ab-iso::after {
+      content: ""; position: absolute; inset: auto -40px -60px auto; width: 180px; height: 180px;
+      border-radius: 50%; border: 28px solid rgba(216, 169, 53, .18);
+    }
+    .ab-seal { width: 96px; height: 96px; margin: 0 auto 1rem; color: var(--ab-gold); }
+    .ab-iso strong { display: block; font-size: 1.6rem; letter-spacing: -.01em; }
+    .ab-iso span { display: block; margin-top: .35rem; color: #cfe0d3; font-size: .98rem; }
+    .ab-iso .ab-iso-tag {
+      display: inline-block; margin-top: 1.1rem; padding: .35rem .9rem; border-radius: 999px;
+      background: rgba(255,255,255,.12); color: #fff; font-size: .88rem; font-weight: 600;
+    }
+
+    /* Section heads */
+    .ab-section { padding: clamp(2.5rem, 6vw, 4.5rem) 0; }
+    .ab-head { max-width: 62ch; margin-bottom: clamp(1.5rem, 4vw, 2.5rem); }
+    .ab-head h2 { font-size: clamp(1.7rem, 3.4vw, 2.5rem); }
+    .ab-head p { margin-top: .8rem; color: var(--ab-muted); line-height: 1.65; }
+
+    /* Bento grid */
+    .ab-bento { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1rem; }
+    .ab-tile {
+      grid-column: span 2; background: #fff; border: 1px solid var(--ab-line);
+      border-radius: 18px; padding: 1.5rem; display: flex; flex-direction: column; gap: .6rem;
+    }
+    .ab-tile h3 { font-size: 1.2rem; }
+    .ab-tile p { color: var(--ab-muted); line-height: 1.6; font-size: .98rem; }
+    .ab-tile.w3 { grid-column: span 3; }
+    .ab-tile.w6 { grid-column: span 6; flex-direction: row; align-items: center; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; }
+    .ab-tile.w6 > div { max-width: 62ch; }
+    .ab-tile.feature { background: var(--ab-green); border-color: var(--ab-green); }
+    .ab-tile.feature h3 { color: #fff; font-size: 1.45rem; }
+    .ab-tile.feature p { color: #cfe0d3; }
+    .ab-tile.soft { background: var(--ab-sage); border-color: var(--ab-sage); }
+    .ab-dot { width: 12px; height: 12px; border-radius: 50%; background: var(--ab-gold); }
+
+    /* Process strip – a true sequence, so numbered */
+    .ab-process { background: var(--ab-sage); }
+    .ab-steps { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, 1fr); gap: 1rem; counter-reset: s; }
+    .ab-steps li { position: relative; padding-top: 3.2rem; counter-increment: s; }
+    .ab-steps li::before {
+      content: counter(s); position: absolute; top: 0; left: 0; width: 2.4rem; height: 2.4rem;
+      display: grid; place-items: center; border-radius: 50%; background: var(--ab-green); color: #fff; font-weight: 700;
+    }
+    .ab-steps li::after {
+      content: ""; position: absolute; top: 1.2rem; left: 2.8rem; right: .4rem; height: 2px; background: var(--ab-green-2); opacity: .35;
+    }
+    .ab-steps li:last-child::after { display: none; }
+    .ab-steps h3 { font-size: 1.05rem; margin-bottom: .3rem; }
+    .ab-steps p { color: var(--ab-muted); font-size: .94rem; line-height: 1.55; }
+
+    /* CTA band */
+    .ab-cta { padding: clamp(2.5rem, 6vw, 4.5rem) 0; }
+    .ab-cta-box {
+      background: var(--ab-green); color: #fff; border-radius: 24px;
+      padding: clamp(1.75rem, 5vw, 3.25rem); display: flex; flex-wrap: wrap; gap: 1.5rem;
+      align-items: center; justify-content: space-between;
+    }
+    .ab-cta-box h2 { font-size: clamp(1.5rem, 3vw, 2.2rem); max-width: 22ch; }
+    .ab-cta-box p { color: #cfe0d3; margin-top: .6rem; max-width: 48ch; line-height: 1.6; }
+    .ab-cta-box .ab-btn { background: var(--ab-gold); border-color: var(--ab-gold); color: #17261b; }
+    .ab-cta-box .ab-btn:hover { background: #e6bb55; border-color: #e6bb55; }
+
+    @media (max-width: 960px) {
+      .ab-hero-grid { grid-template-columns: 1fr; }
+      .ab-iso { max-width: 420px; }
+      .ab-bento { grid-template-columns: repeat(2, 1fr); }
+      .ab-tile, .ab-tile.w3 { grid-column: span 1; }
+      .ab-tile.w6 { grid-column: span 2; }
+      .ab-tile.feature { grid-column: span 2; }
+      .ab-steps { grid-template-columns: 1fr; gap: 1.5rem; }
+      .ab-steps li { padding: 0 0 0 3.4rem; min-height: 2.6rem; }
+      .ab-steps li::after { top: 2.6rem; bottom: -1.3rem; left: 1.15rem; right: auto; width: 2px; height: auto; }
+    }
+    @media (max-width: 600px) {
+      .ab-bento { grid-template-columns: 1fr; }
+      .ab-tile, .ab-tile.w3, .ab-tile.w6, .ab-tile.feature { grid-column: span 1; }
+    }
   </style>
 </head>
 <body>
@@ -73,68 +157,111 @@
       </nav>
     </div>
   </header>
-  <main id="main">
-    <section class="section">
-      <div class="wrap">
-        <p class="eyebrow">About Maa Kamakhya Enterprises</p>
-        <h1>Practical solutions for <em>rice processing.</em></h1>
-        <p>Maa Kamakhya Enterprises provides rice mill setup and processing solutions with specialized expertise in paddy parboiling, steaming and drying technologies.</p>
-        <p>Our focus is on plant planning, technology selection, machinery integration, installation and commissioning support suited to each project's requirements.</p>
-        <p class="iso-badge">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l2.4 2.1 3.2-.3 1 3 2.8 1.6-.9 3.1.9 3.1-2.8 1.6-1 3-3.2-.3L12 22l-2.4-2.1-3.2.3-1-3-2.8-1.6.9-3.1-.9-3.1 2.8-1.6 1-3 3.2.3z"/><path d="M8.5 12.2l2.5 2.5 4.5-4.9"/></svg>
+
+  <main id="main" class="ab">
+    <!-- Hero -->
+    <section class="ab-hero">
+      <div class="ab-wrap ab-hero-grid">
+        <div>
+          <p class="eyebrow">About Maa Kamakhya Enterprises</p>
+          <h1>Practical solutions for <em>rice processing.</em></h1>
+          <p class="ab-lead">Maa Kamakhya Enterprises provides rice mill setup and processing solutions with specialized expertise in paddy parboiling, steaming and drying technologies.</p>
+          <p class="ab-lead">Our focus is on plant planning, technology selection, machinery integration, installation and commissioning support suited to each project's requirements.</p>
+          <div class="ab-actions">
+            <a class="ab-btn ab-btn-primary" href="contact.html">Discuss your project</a>
+            <a class="ab-btn ab-btn-ghost" href="technologies.html">View technologies</a>
+          </div>
+        </div>
+
+        <aside class="ab-iso" aria-label="Certification">
+          <svg class="ab-seal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l2.4 2.1 3.2-.3 1 3 2.8 1.6-.9 3.1.9 3.1-2.8 1.6-1 3-3.2-.3L12 22l-2.4-2.1-3.2.3-1-3-2.8-1.6.9-3.1-.9-3.1 2.8-1.6 1-3 3.2.3z"/><path d="M8.5 12.2l2.5 2.5 4.5-4.9"/></svg>
+          <strong>ISO 9001:2015</strong>
           <span>An ISO 9001:2015 Certified Company</span>
-        </p>
+          <span class="ab-iso-tag">Quality Management System</span>
+        </aside>
       </div>
     </section>
 
-    <section class="section" aria-labelledby="why-title">
-      <div class="wrap">
-        <h2 id="why-title">Why you should choose us</h2>
-        <p class="why-intro">Setting up or upgrading a rice mill is a large investment. These are the things rice millers tell the industry they look for in a plant partner, and how we work to deliver them.</p>
-
-        <ul class="why-list">
-          <li>
-            <h3>ISO 9001:2015 certified quality</h3>
-            <p>Our processes are run under a certified quality management system, so planning, supply and commissioning follow documented, repeatable standards.</p>
-          </li>
-          <li>
-            <h3>Parboiling, steaming and drying specialists</h3>
-            <p>Parboiling and drying decide your head rice yield, colour and breakage. This is our core focus, not an add-on to general machinery supply.</p>
-          </li>
-          <li>
-            <h3>One partner from planning to commissioning</h3>
-            <p>Plant layout, technology selection, machinery integration, installation and trial runs handled together, so you are not coordinating many vendors.</p>
-          </li>
-          <li>
-            <h3>Plants designed around your project</h3>
-            <p>Capacity, paddy variety, product type (raw, steam or parboiled), available space and budget shape the design. We do not push a one-size-fits-all package.</p>
-          </li>
-          <li>
-            <h3>Better recovery, less breakage</h3>
-            <p>Correct soaking, steaming and drying are planned for higher whole-grain recovery, uniform colour and consistent output quality.</p>
-          </li>
-          <li>
-            <h3>Efficient use of fuel and power</h3>
-            <p>Boiler, steam and dryer systems are matched to the plant to keep running costs under control, including husk-fired options where suitable.</p>
-          </li>
-          <li>
-            <h3>Clear scope and timelines</h3>
-            <p>A defined scope of supply, a practical schedule and regular progress updates, so you know what is included and when your mill will start.</p>
-          </li>
-          <li>
-            <h3>Support after commissioning</h3>
-            <p>Operator guidance, spare parts and service support from a team based in Bihar, close to the mills of eastern India.</p>
-          </li>
-        </ul>
-
-        <div class="quality-note">
-          <p><strong>Our quality commitment.</strong> As an ISO 9001:2015 certified company, we work to a quality management system focused on consistent delivery, customer satisfaction and continual improvement.</p>
+    <!-- Why choose us -->
+    <section class="ab-section" aria-labelledby="why-title">
+      <div class="ab-wrap">
+        <div class="ab-head">
+          <h2 id="why-title">Why you should choose us</h2>
+          <p>Setting up or upgrading a rice mill is a large investment. These are the things rice millers look for in a plant partner, and how we work to deliver them.</p>
         </div>
 
-        <p class="about-cta"><a href="contact.html">Talk to us about your rice mill project</a></p>
+        <div class="ab-bento">
+          <article class="ab-tile w3 feature">
+            <span class="ab-dot" aria-hidden="true"></span>
+            <h3>ISO 9001:2015 certified quality</h3>
+            <p>Our processes run under a certified quality management system, so planning, supply and commissioning follow documented, repeatable standards.</p>
+          </article>
+          <article class="ab-tile w3 soft">
+            <h3>Parboiling, steaming and drying specialists</h3>
+            <p>Parboiling and drying decide your head rice yield, colour and breakage. This is our core focus, not an add-on to general machinery supply.</p>
+          </article>
+          <article class="ab-tile">
+            <h3>One partner, start to finish</h3>
+            <p>Layout, technology selection, integration, installation and trial runs handled together, so you are not coordinating many vendors.</p>
+          </article>
+          <article class="ab-tile">
+            <h3>Designed around your project</h3>
+            <p>Capacity, paddy variety, product type (raw, steam or parboiled), space and budget shape the design. No one-size-fits-all package.</p>
+          </article>
+          <article class="ab-tile">
+            <h3>Better recovery, less breakage</h3>
+            <p>Correct soaking, steaming and drying are planned for higher whole-grain recovery, uniform colour and consistent quality.</p>
+          </article>
+          <article class="ab-tile w3">
+            <h3>Efficient use of fuel and power</h3>
+            <p>Boiler, steam and dryer systems are matched to the plant to keep running costs under control, including husk-fired options where suitable.</p>
+          </article>
+          <article class="ab-tile w3">
+            <h3>Clear scope and timelines</h3>
+            <p>A defined scope of supply, a practical schedule and regular progress updates, so you know what is included and when your mill will start.</p>
+          </article>
+          <article class="ab-tile w6 soft">
+            <div>
+              <h3>Support after commissioning</h3>
+              <p>Operator guidance, spare parts and service support from a team based in Bihar, close to the mills of eastern India.</p>
+            </div>
+            <a class="ab-btn ab-btn-primary" href="contact.html">Talk to our team</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Process -->
+    <section class="ab-section ab-process" aria-labelledby="process-title">
+      <div class="ab-wrap">
+        <div class="ab-head">
+          <h2 id="process-title">How a project runs</h2>
+          <p>A clear path from first discussion to a running plant.</p>
+        </div>
+        <ol class="ab-steps">
+          <li><h3>Plant planning</h3><p>Capacity, layout and product goals defined with you.</p></li>
+          <li><h3>Technology selection</h3><p>Parboiling, steaming and drying systems matched to your paddy.</p></li>
+          <li><h3>Machinery integration</h3><p>Cleaning, boiler, dryer and milling sections working as one line.</p></li>
+          <li><h3>Installation</h3><p>Erection of plant and machinery at your site.</p></li>
+          <li><h3>Commissioning support</h3><p>Trial runs, tuning and operator guidance until output is stable.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="ab-cta">
+      <div class="ab-wrap">
+        <div class="ab-cta-box">
+          <div>
+            <h2>Planning a new rice mill or an upgrade?</h2>
+            <p>Share your capacity and product requirements and we will suggest a suitable parboiling, steaming and drying setup.</p>
+          </div>
+          <a class="ab-btn" href="contact.html">Contact us</a>
+        </div>
       </div>
     </section>
   </main>
+
   <footer>
     <div class="wrap footer-grid">
       <div>
